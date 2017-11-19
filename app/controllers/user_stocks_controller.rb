@@ -41,17 +41,18 @@ class UserStocksController < ApplicationController
       end
     end
 
+
     respond_to do |format|
-        if @user_stock.save
-          format.html { redirect_to my_portfolio_path,
-            notice: "Stock #{@user_stock.stock.ticker} was successfully added" }
-          format.json { render :show, status: :created, location: @user_stock }
-        else
-          format.html { render :new }
-          format.json { render json: @user_stock.errors, status: :unprocessable_entity }
-        end
+      if @user_stock.save
+        format.html { redirect_to my_portfolio_path,
+          notice: "Stock #{@user_stock.stock.ticker} was successfully added" }
+        format.json { render :show, status: :created, location: @user_stock }
+      else
+        format.html { render :new }
+        format.json { render json: @user_stock.errors, status: :unprocessable_entity }
       end
     end
+  end
 
   # PATCH/PUT /user_stocks/1
   # PATCH/PUT /user_stocks/1.json
@@ -79,12 +80,12 @@ class UserStocksController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_user_stock
-      @user_stock = UserStock.find(params[:id])
-    end
+  def set_user_stock
+    @user_stock = UserStock.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_stock_params
-      params.require(:user_stock).permit(:user_id, :stock_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_stock_params
+    params.require(:user_stock).permit(:user_id, :stock_id)
+  end
 end
