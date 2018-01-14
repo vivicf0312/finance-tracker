@@ -57,7 +57,7 @@ end
 
 group :production do
   # Postgres
-  gem 'pg'
+  gem 'pg', '~> 0.11'
   #Heroku
   gem 'rails_12factor'
 end
