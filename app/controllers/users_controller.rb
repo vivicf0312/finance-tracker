@@ -16,7 +16,9 @@ class UsersController < ApplicationController
       @users = current_user.except_current_user(@users)
       flash.now[:danger] = "No users match this search criteria" if @users.blank?
     end
-      render partial: 'friends/result'
+    respond_to do |format|
+      format.js { render partial: 'friends/result' }
+    end
   end
 
   def add_friend
@@ -24,7 +26,7 @@ class UsersController < ApplicationController
     current_user.friendships.build(friend_id: @friend.id)
 
     if current_user.save
-      flash[:success] = "Friends was successfully added"
+      flash[:notice] = "Friends was successfully added"
     else
       flash[:danger] = "There was something wrong with the friend request"
     end
